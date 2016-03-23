@@ -27,6 +27,7 @@ class TableRows extends RecursiveIteratorIterator {
     }
 }
 
+
 /**
  * CardsController
  * Controls the CRUD functions of the CardsService.
@@ -49,6 +50,22 @@ class CardsController {
     public function display() {
         $this->viewAllHumans();
         $this->viewAllDogs();
+    }
+
+    /**
+     * Displays all humans in database in JSON format
+     * @return void
+     */
+    public function displayUsersAsJSON() {
+        echo json_encode($this->cardsService->getAllHumans());
+    }
+
+    /**
+     * Displays all dogs in database in JSON format
+     * @return void
+     */
+    public function displayDogsAsJSON() {
+        echo json_encode($this->cardsService->getAllDogs());
     }
 
     /**
