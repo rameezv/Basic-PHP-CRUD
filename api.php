@@ -5,6 +5,7 @@
 
     $controller = new CardsController();
 
+
     $method = $_SERVER['REQUEST_METHOD'];
     $request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
     $input = json_decode(file_get_contents('php://input'),true);
@@ -42,9 +43,26 @@
                 }
             }
             break;
-        case 'PUT':
-            break;
         case 'DELETE':
+            if ($request[0] == "users" && isset($request[1])) {
+                $controller->removeHuman( $request[1] );
+            } elseif ($request[0] == "dogs" && isset($request[1])) {
+                $controller->removeDog( $request[1] );
+            } else {
+                echo json_encode("Invalid User.");
+            }
+            break;
+        case 'PUT':
+            $put = array();
+            parse_str(file_get_contents('php://input'), $put);
+            /*if ($request[0] == "users" && isset($request[1]) {
+                if (isset($))
+                $controller->updateHuman( $id, $name, $job, $phone );
+            } elseif ($request[0] == "dogs" && isset($request[1]) {
+                $controller->removeDog( $request[1] );
+            } else {
+                echo 'Invalid User.'
+            }*/
             break;
         default:
             echo "Invalid Request Method";
